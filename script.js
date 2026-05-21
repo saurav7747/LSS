@@ -3,55 +3,6 @@
    JavaScript – Interactions & Animations
    ============================================= */
 
-/* ---- LOADING SCREEN ---- */
-(function initLoader() {
-  const loader     = document.getElementById('loader');
-  const loaderFull = document.getElementById('loaderFull');
-  const text       = 'Lakhotia Computer Centre';
-  const CHAR_DELAY = 28;          // ms per character  (~0.65s for 24 chars)
-  const HOLD_AFTER = 300;         // ms to hold after typing finishes
-  const FADE_DUR   = 700;         // ms fade duration (matches CSS transition)
-
-  // Type characters one by one
-  let i = 0;
-  function typeNext() {
-    loaderFull.textContent = text.slice(0, i + 1);
-    // Measure actual rendered width and set it so overflow:hidden reveals text
-    loaderFull.style.width = loaderFull.scrollWidth + 'px';
-    i++;
-    if (i < text.length) {
-      setTimeout(typeNext, CHAR_DELAY);
-    } else {
-      // Typing done — blink cursor briefly then fade loader out
-      blinkCursor();
-      setTimeout(fadeOut, HOLD_AFTER);
-    }
-  }
-
-  // Simple cursor blink via border-right toggle
-  function blinkCursor() {
-    let blinks = 0;
-    const iv = setInterval(() => {
-      loaderFull.style.borderRightColor =
-        blinks % 2 === 0 ? 'transparent' : 'var(--gold)';
-      blinks++;
-      if (blinks >= 6) clearInterval(iv);
-    }, 120);
-  }
-
-  function fadeOut() {
-    loader.style.transition = 'opacity ' + (FADE_DUR / 1000) + 's ease';
-    loader.style.opacity    = '0';
-    // Guaranteed removal — don't rely on transitionend
-    setTimeout(() => {
-      loader.style.display = 'none';
-    }, FADE_DUR + 50);
-  }
-
-  // Start typing after a tiny initial pause
-  setTimeout(typeNext, 200);
-})();
-
 
 /* ---- NAVBAR SCROLL ---- */
 (function initNavbar() {
