@@ -1,11 +1,21 @@
-// LOADER
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader');
+// =========================
+// LOADER FIX
+// =========================
 
-  setTimeout(() => {
-    loader.classList.add('hidden');
-    document.body.classList.remove('loading');
-  }, 1800);
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+
+    setTimeout(() => {
+        loader.classList.add("hidden");
+
+        document.body.classList.remove("loading");
+
+        // completely remove after animation
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 700);
+
+    }, 1800);
 });
 
 // NAVBAR SCROLL
